@@ -1,25 +1,24 @@
-import { Select } from 'antd';
-import './HeaderStyled.css';
+// import { Select } from 'antd';
+import { HeaderStyledComponent } from './HeaderStyled';
 const Header = (props) => {
-  const select = props.select;
-  const selectData = props.selectData;
-  const setSelect = props.setSelect;
-  const data1 = props.data1;
-  const data2 = props.data2;
-  const data3 = props.data3;
+  // const select = props.select;
+  // const selectData = props.selectData;
+  // const setSelect = props.setSelect;
 
   return (
     <>
-      <div className="wrapBox">
-        <Select
+      <HeaderStyledComponent>
+        {/* <Select
+          className="wrapBox"
           defaultValue={select}
           style={{ width: 200 }}
           options={selectData}
           onChange={(value) => {
             setSelect(value);
           }}
-        />
-      </div>
+        /> */}
+        <div className="wrapBox"> 헤더입니다.</div>
+      </HeaderStyledComponent>
 
       {/* <div className="items">
         {select === 'first' ? (

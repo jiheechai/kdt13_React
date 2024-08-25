@@ -1,0 +1,45 @@
+.container {
+  text-align: center;
+  margin: 50px;
+  .title {
+    display: flex;
+    justify-content: center;
+  }
+  .formbox {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+}
+
+/* Naver 로그인, 회원가입 스타일 */
+/* .displayBox {
+  text-align: center;
+  margin: 100px;
+  .formBox {
+    margin: 100px;
+    .title {
+      font-size: 3em;
+      font-weight: 1000;
+      color: green;
+      margin: 50px;
+    }
+    .borderbox {
+      border: 1px solid lightgray;
+      border-radius: 20px;
+      padding: 40px;
+      Input {
+        height: 50px;
+      }
+    }
+    .button {
+      margin: 20px 0 0 0;
+      Button {
+        height: 50px;
+        width: 100%;
+        background-color: green;
+        color: white;
+      }
+    }
+  }
+} */

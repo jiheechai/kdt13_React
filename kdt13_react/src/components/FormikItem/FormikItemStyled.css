@@ -1,0 +1,17 @@
+.itembox {
+  width: 100%;
+  background-color: lightblue;
+  margin: 10px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  .contentbox {
+    text-align: left;
+  }
+  /* .buttonbox { */
+  /* justify-content: right; */
+  /* display: inline-block; */
+  /* justify-content: flex-end; */
+  /* text-align: right; */
+  /* } */
+}
