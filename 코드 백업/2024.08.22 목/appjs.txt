@@ -1,0 +1,208 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Input, Button, Select } from 'antd';
+import { useFormik } from 'formik';
+import Formik from './components/Formik';
+import DocumentForm from './components/DocumentForm';
+const App = () => {
+  const [data, setData] = useState([]);
+
+  const dataFormik = useFormik({
+    initialValues: {
+      content: '',
+    },
+
+    onSubmit: (values) => {
+      const Formikdata = {
+        content: values.content,
+      };
+      if (Formikdata.content != '') {
+        setData((result) => [...result, { Formikdata }]);
+      }
+    },
+  });
+
+  return (
+    // ---------------------------------
+    <Formik dataFormik={dataFormik} data={data} setData={setData} />
+  );
+  //------------------------------------------------------formik 로그인, 비밀번호 Naver같이 만들기
+  const [data, setData] = useState();
+
+  const dataFormik = useFormik({
+    initialValues: {
+      id: '',
+      pass: '',
+    },
+
+    onSubmit: (values) => {
+      const Formikdata = {
+        id: values.id,
+        pass: values.pass,
+      };
+      setData(Formikdata);
+    },
+  });
+
+  return (
+    // ---------------------------------
+    <Formik dataFormik={dataFormik} data={data} />
+  );
+  //아래는 컴포넌트로 뺀 부분
+    <>
+      <form onSubmit={dataFormik.handleSubmit}>
+        <div>NAVER</div>
+        <div>
+          <Input name="id" onChange={dataFormik.handleChange} />
+        </div>
+        <div>
+          <Input name="pass" onChange={dataFormik.handleChange} />
+        </div>
+        <Button htmlType="submit">로그인</Button>
+      </form>
+      {data ? (
+        <>
+          <div>아이디 : {data.id}</div>
+          <div>비밀번호 : {data.pass}</div>
+        </>
+      ) : (
+        <></>
+      )}
+    </>
+  );
+
+  //-------------------------------------------------------------------formik
+  const [data, setData] = useState();
+  useEffect(() => {
+    dataFormik.setFieldValue('name', data.name);
+    dataFormik.setFieldValue('nickName', data.nickName);
+    dataFormik.setFieldValue('email', data.email);
+    dataFormik.setFieldValue('pass', data.pass);
+    dataFormik.setFieldValue('address', data.address);
+    dataFormik.setFieldValue('detailAddress', data.detailAddress);
+    dataFormik.setFieldValue('phone', data.phone);
+  }, [data]);
+  const dataFormik = useFormik({
+    initialValues: {
+      name: '',
+      nickName: '',
+      email: '',
+      pass: '',
+      address: '',
+      detailAddress: '',
+      phone: '',
+    },
+    onSubmit: (values) => {
+      console.log(values, 'asd');
+      const formikdata = {
+        name: values.name,
+        nickName: values.nickName,
+        email: values.email,
+        pass: values.pass,
+        address: values.address,
+        detailAddress: values.detailAddress,
+        phone: values.phone,
+      };
+      setData(formikdata);
+    },
+  });
+  return (
+    <>
+      <div>Formik 사용</div>
+      <Formik dataFormik={dataFormik} data={data} />
+      <hr />
+      <br />
+      <div>Document 사용</div>
+      <DocumentForm data={data} setData={setData} />
+      {data ? (
+        <>
+          <div>이름 : {data.name} </div>
+          <div>닉네임 : {data.nickName} </div>
+          <div>이메일 : {data.email} </div>
+          <div>비밀번호 : {data.pass} </div>
+          <div>주소 : {data.address} </div>
+          <div>상세주소 : {data.detailAddress} </div>
+          <div>휴대폰번호 : {data.phone} </div>
+        </>
+      ) : (
+        <></>
+      )}
+    </>
+  // components /Formid/index.js
+  <>
+    <form onSubmit={dataFormik.handleSubmit}>
+      <div>
+        이름:
+        <Input
+          name="name"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.name}
+        />
+      </div>
+      <div>
+        닉네임:
+        <Input
+          name="nickName"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.nickName}
+        />
+      </div>
+      <div>
+        이메일:
+        <Input
+          name="email"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.email}
+        />
+      </div>
+      <div>
+        비밀번호:
+        <Input
+          name="pass"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.pass}
+        />
+      </div>
+      <div>
+        주소:
+        <Input
+          name="address"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.address}
+        />
+      </div>
+      <div>
+        상세주소:
+        <Input
+          name="detailAddress"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.detailAddress}
+        />
+      </div>
+      <div>
+        휴대폰번호:
+        <Input
+          name="phone"
+          onChange={dataFormik.handleChange}
+          value={dataFormik.values.phone}
+        />
+      </div>
+      <Button htmlType="submit">실행!</Button>
+    </form>
+    {data ? (
+      <>
+        <div>이름 : {data.name} </div>
+        <div>닉네임 : {data.nickName} </div>
+        <div>이메일 : {data.email} </div>
+        <div>비밀번호 : {data.pass} </div>
+        <div>주소 : {data.address} </div>
+        <div>상세주소 : {data.detailAddress} </div>
+        <div>휴대폰번호 : {data.phone} </div>
+      </>
+    ) : (
+      <></>
+    )}
+  </>
+  );
+};
+
+export default App;
