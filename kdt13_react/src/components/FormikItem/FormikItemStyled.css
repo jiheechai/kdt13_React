@@ -1,17 +1,40 @@
-.itembox {
-  width: 100%;
+.itemBox {
   background-color: lightblue;
-  margin: 10px;
-  height: 40px;
+  margin-top: 30px;
+  height: 60px;
   border-radius: 10px;
   display: flex;
-  .contentbox {
-    text-align: left;
+  align-items: center;
+  justify-content: space-between;
+  font-size: x-large;
+  font-weight: bold;
+
+  .text {
+    margin: 3%;
+    /* justify-content: center; */
+    /* text-align: left; */
   }
-  /* .buttonbox { */
-  /* justify-content: right; */
-  /* display: inline-block; */
-  /* justify-content: flex-end; */
-  /* text-align: right; */
-  /* } */
+  .btnBox {
+    margin: 3%;
+    button {
+      width: 50px;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      font-size: medium;
+    }
+    .import {
+      margin-right: 5px;
+      background-color: rgb(26, 187, 107);
+      color: whitesmoke;
+    }
+    .delete {
+      background-color: rgb(224, 55, 112);
+      color: whitesmoke;
+    }
+  }
+}
+.itemBox.active {
+  background-color: rgb(247, 205, 205);
+  color: rgb(255, 48, 93);
 }

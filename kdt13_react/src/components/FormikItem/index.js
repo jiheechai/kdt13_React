@@ -1,46 +1,66 @@
-import { Button } from 'antd';
-import { useRef } from 'react';
 import './FormikItemStyled.css';
-const FormikItem = (props) => {
-  //   const Formikdata = props.Formikdata;
-  //   const data = props.data;
-  const x = props.x;
-  const setData = props.setData;
-  const data = props.data;
-  const contentRef = useRef('');
-  const clickImportant = () => {
-    if (contentRef.current.style.backgroundColor != 'pink') {
-      contentRef.current.style.setProperty('background-color', 'pink');
-      contentRef.current.style.setProperty('color', 'red');
-      //   console.log(contentRef.current.style.backgroundColor);
-    } else {
-      contentRef.current.style.setProperty('background-color', 'lightblue');
-      contentRef.current.style.setProperty('color', 'black');
-      //   console.log(contentRef.current.style.backgroundColor);
-    }
+const Item = (props) => {
+  const { item, data, setData, trash, setTrash } = props;
+  const hotChange = () => {
+    const updatedData = data.map((i) =>
+      i.id === item.id ? { ...i, type: !i.type } : i
+    );
+    setData(updatedData);
   };
-  const clickDelete = () => {
-    const content = contentRef.current.querySelector('.contentbox').textContent;
-    // console.log(content);
-    // console.log(x);
+  const deleteData = () => {
+    const removeData = data.filter((i) => i.id !== item.id);
+    const newtrashData = item;
 
-    // console.log(data);
-    const newData = data.filter((item) => item.Formikdata.content != content);
-    setData(newData);
-    console.log(newData);
+    setData(removeData);
+    setTrash([...trash, newtrashData]);
+    // console.log(trash);
   };
+
   return (
-    <div className="itembox" ref={contentRef}>
-      <div className="contentbox">{x.Formikdata.content}</div>
-      <div className="buttonbox">
-        <Button className="important" onClick={clickImportant}>
+    <div className={`itemBox ${item.type ? 'active' : ''}`}>
+      <div className="text">{item.text}</div>
+      <div className="btnBox">
+        <button className="import" onClick={hotChange}>
           중요
-        </Button>
-        <Button className="delete" onClick={clickDelete}>
+        </button>
+        <button className="delete" onClick={deleteData}>
           삭제
-        </Button>
+        </button>
       </div>
     </div>
   );
 };
-export default FormikItem;
+export default Item;
+
+// import { Button } from 'antd';
+// import './FormikItemStyled.css';
+// const FormikItem = (props) => {
+//   const { data, item, setData } = props;
+
+//   const clickImportant = () => {
+//     const updateData = data.map((i) => {
+//       i.id === item.id ? { ...i, flag: !i.flag } : i;
+//     });
+//     setData(updateData);
+//   };
+//   const clickDelete = () => {};
+
+//   // console.log(data);
+
+//   // console.log(i.Formikdata.id);
+//   // console.log(item.id);
+//   return (
+//     <div className={item.flag ? 'itembox flagTrue' : 'itembox'}>
+//       <div className="contentbox">{item.Formikdata.content}</div>
+//       <div className="buttonbox">
+//         <Button className="important" onClick={clickImportant}>
+//           중요
+//         </Button>
+//         <Button className="delete" onClick={clickDelete}>
+//           삭제
+//         </Button>
+//       </div>
+//     </div>
+//   );
+// };
+// export default FormikItem;

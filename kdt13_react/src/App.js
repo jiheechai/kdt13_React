@@ -1,62 +1,98 @@
-import { useState, useRef } from 'react';
-import { Input, Button } from 'antd';
-
-import { data1 } from './utill/data';
-import { data2 } from './utill/data';
-import { data3 } from './utill/data';
+import { Button, Flex, Input, notification } from 'antd';
+import { useState } from 'react';
 import { useFormik } from 'formik';
-import Search1 from './components/Search1';
+import Formik from './components/Formik';
+import TodoTrash from './components/TodoTrash';
 const App = () => {
-  // const [select, setSelect] = useState('first');
-  // const selectData = [
-  //   { value: 'first', label: '첫화면' },
-  //   { value: 'second', label: '두번째' },
-  //   { value: 'third', label: '세번째' },
-  // ];
-  const [input, setInput] = useState('');
-  const [searchData, setSearchData] = useState([]);
-  const [searchIncludeData, setSearchIncludeData] = useState([]);
-
-  const allData = [...data1, ...data2, ...data3];
-
-  const dataFormik = useFormik({
-    initialValues: { input: '' },
+  const [data, setData] = useState([]);
+  const [trash, setTrash] = useState([]);
+  const inputFormik = useFormik({
+    initialValues: {
+      input: '',
+    },
     onSubmit: (values) => {
-      setInput(values.input);
-      // console.log(newItem);
+      if (values.input === '') {
+        notification.warning({
+          message: '할 일을 입력해 주세요!',
+        });
+        return;
+      } else {
+        inputFormik.resetForm();
+        const newItem = {
+          id: Date.now() + Math.random().toString(36).substr(2, 9),
+          text: values.input,
+          type: false,
+        };
+        setData([...data, newItem]);
+      }
     },
   });
-
   return (
-    <>
-      <form onSubmit={dataFormik.handleSubmit}>
-        <div className="containerBox">
-          <div className="inputBox" style={{ display: 'flex' }}>
-            <Input
-              placeholder="검색어를 입력하세요."
-              name="input"
-              value={dataFormik.values.input}
-              onChange={dataFormik.handleChange}
-            />
-            <Button htmlType="submit">검색</Button>
-          </div>
-
-          <Search1
-            searchData={searchData}
-            setSearchData={setSearchData}
-            searchIncludeData={searchIncludeData}
-            setSearchIncludeData={setSearchIncludeData}
-            input={input}
-            allData={allData}
-            data1={data1}
-            data2={data2}
-            data3={data3}
-          />
-          {/* <Search1 setResult1={setResult1} input={input} data={data2} />
-          <Search1 setResult1={setResult1} input={input} data={data3} /> */}
-        </div>
-      </form>
-    </>
+    <div style={{ display: 'flex' }}>
+      <Formik
+        data={data}
+        setData={setData}
+        inputFormik={inputFormik}
+        trash={trash}
+        setTrash={setTrash}
+      />
+      <TodoTrash trash={trash} />
+    </div>
   );
 };
 export default App;
+
+//----------------------------to do list 내 코드
+// import { useState } from 'react';
+// import { Input, Button, Select } from 'antd';
+// import { useFormik } from 'formik';
+// import FormikItem from './components/FormikItem';
+// const App = () => {
+//   const [data, setData] = useState([]);
+//   const [deleteData, setDeleteData] = useState([]);
+//   // const contentRef = useRef('');
+
+//   const dataFormik = useFormik({
+//     initialValues: {
+//       content: '',
+//     },
+
+//     onSubmit: (values) => {
+//       const Formikdata = {
+//         id: Date.now() + Math.random().toString(36).substr(2, 9),
+//         content: values.content,
+//         flag: false,
+//       };
+//       if (Formikdata.content != '') {
+//         setData((result) => [...result, { Formikdata }]);
+//       }
+//     },
+//   });
+
+//   return (
+//     <div className="container">
+//       <div className="title">
+//         할 일<div className="dot">.</div>
+//       </div>
+//       <div>
+//         <form onSubmit={dataFormik.handleSubmit} className="formbox">
+//           <Input
+//             name="content"
+//             onChange={dataFormik.handleChange}
+//             placeholder="할 일을 입력하세요!"
+//           />
+//           <div className="button">
+//             <Button htmlType="submit">등록</Button>
+//           </div>
+//         </form>
+//       </div>
+//       <div>
+//         {data?.map((x, i) => {
+//           // FormikItem : 글 하나하나의 컴포넌트
+//           return <FormikItem data={data} setData={setData} item={x} key={i} />;
+//         })}
+//       </div>
+//     </div>
+//   );
+// };
+// export default App;

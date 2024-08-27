@@ -1,14 +1,32 @@
-.container {
-  text-align: center;
+.listBox {
+  /* text-align: center; */
+  width: 30%;
   margin: 50px;
   .title {
+    /* width: 100%; */
     display: flex;
     justify-content: center;
+    margin-bottom: 3%;
+    font-size: 3em;
+    font-weight: bolder;
+    .done {
+      color: red;
+    }
   }
-  .formbox {
+  .todoBox {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    margin: 20px;
+    /* height: 40px; */
+
+    Input {
+      font-size: medium;
+      height: 40px;
+      margin-right: 7px;
+    }
+    Button {
+      font-size: medium;
+      height: 40px;
+    }
   }
 }
 
