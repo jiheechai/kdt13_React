@@ -1,0 +1,54 @@
+import { useState, useRef } from 'react';
+
+const App = () => {
+  const nameRef = useRef();
+  const titleRef = useRef();
+  const dateRef = useRef();
+  const [data, setData] = useState([]);
+  const clickFocus = () => {
+    if (nameRef.current.value == '') {
+      nameRef.current.focus();
+    } else if (titleRef.current.value == '') {
+      titleRef.current.focus();
+    } else if (dateRef.current.value == '') {
+      dateRef.current.focus();
+    }
+    if (
+      nameRef.current.value != '' &&
+      titleRef.current.value != '' &&
+      dateRef.current.value != ''
+    ) {
+      setData((result) => [
+        ...result,
+        {
+          person: nameRef.current.value,
+          title: titleRef.current.value,
+          date: dateRef.current.value,
+        },
+      ]);
+    }
+  };
+
+  return (
+    <>
+      <div>
+        작성자 : <input ref={nameRef} />
+        제목 : <input ref={titleRef} />
+        날짜 : <input ref={dateRef} />
+        <button onClick={clickFocus}>작성</button>
+      </div>
+      <div>
+        {data?.map((x, i) => {
+          // console.log('로그', x);
+
+          return (
+            <div key={i}>
+              작성자 : {x.person} 제목 : {x.title} 날짜 : {x.date}
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+  };
+export default App;

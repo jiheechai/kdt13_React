@@ -1,0 +1,21 @@
+import { useState } from 'react';
+import { Button } from 'antd';
+
+const App = () => {
+  const [number, setNumber] = useState(0);
+  const numup = () => {
+    setNumber(number + 1);
+  };
+  const numdown = () => {
+    setNumber(number - 1);
+  };
+
+  return (
+    <>
+      <Button onClick={numup}>+</Button>
+      <div>{number}</div>
+      <Button onClick={numdown}>-</Button>
+    </>
+  );
+};
+export default App;

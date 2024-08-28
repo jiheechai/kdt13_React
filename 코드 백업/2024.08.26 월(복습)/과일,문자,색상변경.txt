@@ -1,0 +1,46 @@
+import { useState } from 'react';
+import tangerine from './image/tangerine.jpg';
+import blueberry from './image/blueberry.jpg';
+import peach from './image/peach.jpg';
+import PropsStateEventRedo from './components/PropsStateEventRedo';
+
+const App = () => {
+  const [fruit, setFruit] = useState('tangerine');
+  const [bgcolor, setBgcolor] = useState('red');
+  const [color, setColor] = useState('red');
+  const [content, setContent] = useState('');
+
+  const fruitData = [
+    { value: 'tangerine', label: '귤' },
+    { value: 'blueberry', label: '블루베리' },
+    { value: 'peach', label: '복숭아' },
+  ];
+  const colorData = [
+    { value: 'red', label: '빨강색' },
+    { value: 'orange', label: '주황색' },
+    { value: 'yellow', label: '노랑색' },
+    { value: 'green', label: '초록색' },
+    { value: 'blue', label: '파랑색' },
+  ];
+
+  return (
+    <>
+      <PropsStateEventRedo
+        fruit={fruit}
+        setFruit={setFruit}
+        bgcolor={bgcolor}
+        setBgcolor={setBgcolor}
+        color={color}
+        setColor={setColor}
+        content={content}
+        setContent={setContent}
+        tangerine={tangerine}
+        blueberry={blueberry}
+        peach={peach}
+        fruitData={fruitData}
+        colorData={colorData}
+      />
+    </>
+  );
+};
+export default App;

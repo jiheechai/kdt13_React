@@ -1,4 +1,4 @@
-import TrashItem from '..TrashItem/';
+import TrashItem from '../TrashItem';
 const TodoTrash = (props) => {
   const { trash } = props;
   //   console.log(trash);
